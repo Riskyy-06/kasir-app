@@ -7,13 +7,13 @@
 </head>
 <body class="p-4">
 
-    <div class="d-flex justify-content-between mb-3">
+    {{-- <div class="d-flex justify-content-between mb-3">
         <div>Hai, {{ Auth::user()->name }}</div>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button class="btn btn-sm btn-outline-secondary">Logout</button>
         </form>
-    </div>
+    </div> --}}
     
     <div class="container">
         <h2>Data Produk</h2>

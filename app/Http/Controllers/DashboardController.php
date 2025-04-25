@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transaksi;
-use App\Models\Kategori;
 use App\Models\Produk;
-use Carbon\Carbon;
+use App\Models\Kategori;
+use App\Models\Transaksi;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
