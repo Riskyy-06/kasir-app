@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
 {
-    // Define model properties or relationships here if needed  
+    public function detailTransaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class);
+    }
 }
