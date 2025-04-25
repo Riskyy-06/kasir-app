@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -12,7 +13,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $produks = Produk::with('kategori')->get();
+        return view('produk.index', compact('produks'));
     }
 
     /**
@@ -20,7 +22,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        $kategoris = Kategori::all();
+        return view('produk.create', compact('kategoris'));
     }
 
     /**
@@ -28,7 +31,15 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kategori_id' => 'required',
+            'stok' => 'required|integer',
+            'harga' => 'required|numeric',
+        ]);
+    
+        Produk::create($request->all());
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +55,9 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        $produk = Produk::findOrFail($id);
+        $kategoris = Kategori::all();
+        return view('produk.edit', compact('produk', 'kategoris'));
     }
 
     /**
@@ -52,7 +65,17 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kategori_id' => 'required',
+            'stok' => 'required|integer',
+            'harga' => 'required|numeric',
+        ]);
+    
+        $produk = Produk::findOrFail($id);
+        $produk->update($request->all());
+    
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
 
     /**
@@ -60,6 +83,9 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+    
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus');
     }
 }
