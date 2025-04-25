@@ -85,6 +85,9 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->delete();
+
+        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus');
     }
 }

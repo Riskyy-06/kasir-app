@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="p-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <div>Hai, {{ Auth::user()->name }}</div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button class="btn btn-sm btn-outline-secondary">Logout</button>
+        </form>
+    </div>
+    
     <div class="container">
         <h2>Data Produk</h2>
 
