@@ -50,7 +50,6 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        $kategori = Kategori::findOrFail($id);
         return view('kategori.edit', compact('kategori'));
     }
 
@@ -62,8 +61,7 @@ class KategoriController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255'
         ]);
-    
-        $kategori = Kategori::findOrFail($id);
+
         $kategori->update($request->all());
     
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate');

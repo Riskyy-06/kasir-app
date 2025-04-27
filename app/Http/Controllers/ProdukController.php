@@ -55,7 +55,6 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        $produk = Produk::findOrFail($id);
         $kategoris = Kategori::all();
         return view('produk.edit', compact('produk', 'kategoris'));
     }
@@ -71,8 +70,7 @@ class ProdukController extends Controller
             'stok' => 'required|integer',
             'harga' => 'required|numeric',
         ]);
-    
-        $produk = Produk::findOrFail($id);
+
         $produk->update($request->all());
     
         return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
